@@ -317,7 +317,7 @@
    &trans    &trans           &kp LG(W)        &kp F11          &trans           &kp C_VOL_UP    &kp PG_UP &kp HOME     &kp UP       &kp END      &kp DEL      &kp BSPC
    &trans    &os_cmd LCMD     &kp LALT         &os_ctrl LCTRL   &os_shift LSHFT  &kp C_VOL_DN    &kp PG_DN &kp LEFT     &kp DOWN     &kp RIGHT    &kp INS      &trans
    &trans    &kp LG(Z)        &kp LG(X)        &kp LG(C)        &kp LG(V)        &kp C_MUTE      &trans    &kp LG(L)    &kp LG(D)    &trans       &trans       &trans
-                                              &trans           &trans           &trans          &trans    &mo 3        &trans
+                                               &trans           &trans           &trans          &trans    &mo 3        &trans
             >;
         };
 

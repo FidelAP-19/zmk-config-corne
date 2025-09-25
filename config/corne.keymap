@@ -64,6 +64,13 @@
             #binding-cells = <0>;
             bindings = <&kp QMARK &kp QMARK>;
         };
+        
+        macro_cmd_shift: macro_cmd_shift {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_CMD_SHIFT";
+            #binding-cells = <0>;
+            bindings = <&kp LCMD>, <&kp LSHFT>;
+        };
     };
 
     behaviors {
@@ -259,7 +266,7 @@
         combo_one_shot_cmd_shift {
             timeout-ms = <35>;
             key-positions = <25 27>; // z c
-            bindings = <&kp LG(LSHFT)>;
+            bindings = <&macro_cmd_shift>;
             layers = <0>;
         };
         
@@ -276,6 +283,7 @@
             bindings = <&os_ctrl LCTRL>;
             layers = <0>;
         };
+    };
     };
 
     keymap {

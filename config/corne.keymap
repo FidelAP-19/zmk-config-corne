@@ -15,342 +15,71 @@
 };
 
 / {
-    macros {
-        macro_arrow: macro_arrow {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_ARROW";
-            #binding-cells = <0>;
-            bindings = <&kp MINUS &kp GT>;
-        };
-        
-        macro_fat_arrow: macro_fat_arrow {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_FAT_ARROW";
-            #binding-cells = <0>;
-            bindings = <&kp EQUAL &kp GT>;
-        };
-        
-        macro_double_equal: macro_double_equal {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_DOUBLE_EQUAL";
-            #binding-cells = <0>;
-            bindings = <&kp EQUAL &kp EQUAL>;
-        };
-        
-        macro_not_equal: macro_not_equal {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_NOT_EQUAL";
-            #binding-cells = <0>;
-            bindings = <&kp EXCL &kp EQUAL>;
-        };
-        
-        macro_string_interp: macro_string_interp {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_STRING_INTERP";
-            #binding-cells = <0>;
-            bindings = <&kp DLLR &kp LBRC &kp RBRC>;
-        };
-        
-        macro_scope_res: macro_scope_res {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_SCOPE_RES";
-            #binding-cells = <0>;
-            bindings = <&kp COLON &kp COLON>;
-        };
-        
-        macro_null_coal: macro_null_coal {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_NULL_COAL";
-            #binding-cells = <0>;
-            bindings = <&kp QMARK &kp QMARK>;
-        };
-        
-        macro_cmd_shift: macro_cmd_shift {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_CMD_SHIFT";
-            #binding-cells = <0>;
-            bindings = <&kp LCMD>, <&kp LSHFT>;
-        };
-    };
+        keymap {
+                compatible = "zmk,keymap";
 
-    behaviors {
-        // One-shot modifiers with optimized timeouts
-        os_cmd: one_shot_cmd {
-            compatible = "zmk,behavior-one-shot";
-            label = "ONE_SHOT_CMD";
-            #binding-cells = <1>;
-            bindings = <&kp>;
-            one-shot-tap-ms = <1200>;
-        };
-        
-        os_shift: one_shot_shift {
-            compatible = "zmk,behavior-one-shot";
-            label = "ONE_SHOT_SHIFT";
-            #binding-cells = <1>;
-            bindings = <&kp>;
-            one-shot-tap-ms = <800>;
-        };
-        
-        os_ctrl: one_shot_ctrl {
-            compatible = "zmk,behavior-one-shot";
-            label = "ONE_SHOT_CTRL";
-            #binding-cells = <1>;
-            bindings = <&kp>;
-            one-shot-tap-ms = <800>;
-        };
-    };
-
-    combos {
-        compatible = "zmk,combos";
-        
-        // Programming symbol combos (cross-hand for reliability)
-        combo_parens {
-            timeout-ms = <35>;
-            key-positions = <16 19>;  // f j (cross-hand)
-            bindings = <&kp LPAR>;
-            layers = <0>;
-        };
-        
-        combo_parens_close {
-            timeout-ms = <35>;
-            key-positions = <17 18>;  // g h (cross-hand)
-            bindings = <&kp RPAR>;
-            layers = <0>;
-        };
-        
-        combo_brackets {
-            timeout-ms = <35>;
-            key-positions = <15 20>;  // d k (cross-hand)
-            bindings = <&kp LBKT>;
-            layers = <0>;
-        };
-        
-        combo_brackets_close {
-            timeout-ms = <35>;
-            key-positions = <16 20>;  // f k (cross-hand)
-            bindings = <&kp RBKT>;
-            layers = <0>;
-        };
-        
-        combo_braces {
-            timeout-ms = <35>;
-            key-positions = <27 32>;  // c , (cross-hand)
-            bindings = <&kp LBRC>;
-            layers = <0>;
-        };
-        
-        combo_braces_close {
-            timeout-ms = <35>;
-            key-positions = <28 31>;  // v m (cross-hand)
-            bindings = <&kp RBRC>;
-            layers = <0>;
-        };
-        
-        // Common programming patterns
-        combo_arrow {
-            timeout-ms = <35>;
-            key-positions = <14 15>;  // s d
-            bindings = <&macro_arrow>;
-            layers = <0>;
-        };
-        
-        combo_fat_arrow {
-            timeout-ms = <35>;
-            key-positions = <3 4>;   // e r
-            bindings = <&macro_fat_arrow>;
-            layers = <0>;
-        };
-        
-        combo_equals {
-            timeout-ms = <35>;
-            key-positions = <21 22>;  // l ; (cross-hand safer)
-            bindings = <&macro_double_equal>;
-            layers = <0>;
-        };
-        
-        combo_not_equals {
-            timeout-ms = <35>;
-            key-positions = <2 3>;   // w e
-            bindings = <&macro_not_equal>;
-            layers = <0>;
-        };
-        
-        combo_dot_method {
-            timeout-ms = <35>;
-            key-positions = <19 21>;  // j l (cross-hand)
-            bindings = <&kp DOT>;
-            layers = <0>;
-        };
-        
-        combo_underscore {
-            timeout-ms = <35>;
-            key-positions = <26 27>; // x c
-            bindings = <&kp UNDER>;
-            layers = <0>;
-        };
-        
-        // Advanced programming patterns
-        combo_string_interpolation {
-            timeout-ms = <35>;
-            key-positions = <4 5>;   // r t
-            bindings = <&macro_string_interp>;
-            layers = <0>;
-        };
-        
-        combo_scope_resolution {
-            timeout-ms = <35>;
-            key-positions = <8 9>;   // i o
-            bindings = <&macro_scope_res>;
-            layers = <0>;
-        };
-        
-        combo_null_coalescing {
-            timeout-ms = <35>;
-            key-positions = <9 10>;  // o p
-            bindings = <&macro_null_coal>;
-            layers = <0>;
-        };
-        
-        // Navigation combos
-        combo_escape {
-            timeout-ms = <35>;
-            key-positions = <12 13>; // a s
-            bindings = <&kp ESC>;
-            layers = <0>;
-        };
-        
-        combo_delete_word {
-            timeout-ms = <35>;
-            key-positions = <20 21>; // k l 
-            bindings = <&kp LA(BSPC)>;
-            layers = <0>;
-        };
-        
-        combo_tab {
-            timeout-ms = <35>;
-            key-positions = <1 2>;   // q w
-            bindings = <&kp TAB>;
-            layers = <0>;
-        };
-        
-        // IDE shortcuts
-        combo_go_to_definition {
-            timeout-ms = <35>;
-            key-positions = <13 14>; // s d
-            bindings = <&kp LG(B)>;
-            layers = <0>;
-        };
-        
-        combo_organize_imports {
-            timeout-ms = <35>;
-            key-positions = <7 8>;   // u i
-            bindings = <&kp LG(LS(O))>;
-            layers = <0>;
-        };
-        
-        combo_command_palette {
-            timeout-ms = <35>;
-            key-positions = <1 10>;  // q p (cross-hand)
-            bindings = <&kp LG(LS(P))>;
-            layers = <0>;
-        };
-        
-        // Enhanced one-shot modifiers
-        combo_one_shot_cmd {
-            timeout-ms = <35>;
-            key-positions = <25 26>; // z x
-            bindings = <&os_cmd LCMD>;
-            layers = <0>;
-        };
-        
-        combo_one_shot_cmd_shift {
-            timeout-ms = <35>;
-            key-positions = <25 27>; // z c
-            bindings = <&macro_cmd_shift>;
-            layers = <0>;
-        };
-        
-        combo_one_shot_shift {
-            timeout-ms = <35>;
-            key-positions = <31 32>; // m ,
-            bindings = <&os_shift LSHFT>;
-            layers = <0>;
-        };
-        
-        combo_one_shot_ctrl {
-            timeout-ms = <35>;
-            key-positions = <30 31>; // n m
-            bindings = <&os_ctrl LCTRL>;
-            layers = <0>;
-        };
-    };
-    };
-
-    keymap {
-        compatible = "zmk,keymap";
-
-        // Base Layer (QWERTY with home row mods)
-        default_layer {
-            display-name = "Base";
+                // Base Layer (QWERTY)
+                default_layer {
+                        display-name = "Base";
 // -----------------------------------------------------------------------------------------
 // | TAB  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  | BSPC |
 // | ESC  |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  | ; : |  '   |
 // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  | , < | . > | / ? | SHFT |
 //                    | CMD | NAV | SPC |   | ENT | SYM | OPT |
-            bindings = <
-   &kp TAB    &kp Q            &kp W            &kp E            &kp R            &kp T      &kp Y &kp U            &kp I            &kp O            &kp P            &kp BSPC
-   &kp ESC    &mt LGUI A       &mt LALT S       &mt LCTRL D      &mt LSHFT F      &kp G      &kp H &mt RSHFT J      &mt RCTRL K      &mt RALT L       &mt RGUI SEMI    &kp SQT
-   &kp LSHFT  &kp Z            &kp X            &kp C            &kp V            &kp B      &kp N &kp M            &kp COMMA        &kp DOT          &kp FSLH         &kp RSHFT
-                                                &os_cmd LCMD     &mo 1            &kp SPACE  &kp RET &mo 2          &kp ROPT
-            >;
-        };
+                        bindings = <
+   &kp TAB    &kp Q     &kp W     &kp E     &kp R     &kp T      &kp Y   &kp U     &kp I      &kp O     &kp P     &kp BSPC
+   &kp ESC    &kp A     &kp S     &kp D     &kp F     &kp G      &kp H   &kp J     &kp K      &kp L     &kp SEMI  &kp SQT
+   &kp LSHFT  &kp Z     &kp X     &kp C     &kp V     &kp B      &kp N   &kp M     &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
+                                  &kp LCMD  &mo 1     &kp SPACE  &kp RET &mo 2     &kp ROPT
+                        >;
+                };
 
-        // Navigation Layer
-        nav_layer {
-            display-name = "Nav";
+                // Navigation Layer
+                nav_layer {
+                        display-name = "Nav";
 // -----------------------------------------------------------------------------------------
-// |      |     | CMD+W | F-Keys|     | VOL+ |   | PGUP | HOME |  UP  | END  | DEL  | BSPC |
-// |      | CMD | OPT  | CTRL  | SHFT| VOL- |   | PGDN | LFT  | DWN  | RGT  | INS  |      |
-// |      | UNDO| CUT  | COPY  | PSTE| MUTE |   |      | CMD+L| CMD+D|      |      |      |
-//                     |       |      |      |   |      | ADJ  |      |
-            bindings = <
-   &trans    &trans           &kp LG(W)        &kp F11          &trans           &kp C_VOL_UP    &kp PG_UP &kp HOME     &kp UP       &kp END      &kp DEL      &kp BSPC
-   &trans    &os_cmd LCMD     &kp LALT         &os_ctrl LCTRL   &os_shift LSHFT  &kp C_VOL_DN    &kp PG_DN &kp LEFT     &kp DOWN     &kp RIGHT    &kp INS      &trans
-   &trans    &kp LG(Z)        &kp LG(X)        &kp LG(C)        &kp LG(V)        &kp C_MUTE      &trans    &kp LG(L)    &kp LG(D)    &trans       &trans       &trans
-                                               &trans           &trans           &trans          &trans    &mo 3        &trans
-            >;
-        };
+// |      |     | CMD+W | F11  |     | VOL+ |   | PGUP | HOME |  UP  | END  | DEL  | BSPC |
+// |      | CMD | OPT  | CTRL | SHFT| VOL- |   | PGDN | LFT  | DWN  | RGT  | INS  |      |
+// |      | UNDO| CUT  | COPY | PSTE| MUTE |   |      | CMD+L| CMD+D|      |      |      |
+//                     |      |     |      |   |      | ADJ  |      |
+                        bindings = <
+   &trans  &trans    &kp LG(W)  &kp F11   &trans    &kp C_VOL_UP  &kp PG_UP &kp HOME  &kp UP    &kp END    &kp DEL   &kp BSPC
+   &trans  &kp LCMD  &kp LALT   &kp LCTRL &kp LSHFT &kp C_VOL_DN  &kp PG_DN &kp LEFT  &kp DOWN  &kp RIGHT  &kp INS   &trans
+   &trans  &kp LG(Z) &kp LG(X)  &kp LG(C) &kp LG(V) &kp C_MUTE    &trans    &kp LG(L) &kp LG(D) &trans     &trans    &trans
+                                &trans    &trans    &trans        &trans    &mo 3     &trans
+                        >;
+                };
 
-        // Symbol Layer
-        symbol_layer {
-            display-name = "Sym";
+                // Symbol Layer
+                symbol_layer {
+                        display-name = "Sym";
 // -----------------------------------------------------------------------------------------
 // |      |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
 // |      |  `  |  ~  |  -  |  _  |  {  |   |  }  |  =  |  +  |  [  |  ]  |  \   |
 // |      |     |     |     |  |  |  <  |   |  >  |     |     |     |     |      |
 //                    |      | ADJ |     |   |     |     |     |
-            bindings = <
-   &trans    &kp EXCL         &kp AT           &kp HASH         &kp DLLR         &kp PRCNT       &kp CARET &kp AMPS     &kp ASTRK    &kp LPAR     &kp RPAR     &kp BSPC
-   &trans    &kp GRAVE        &kp TILDE        &kp MINUS        &kp UNDER        &kp LBRC        &kp RBRC  &kp EQUAL    &kp PLUS     &kp LBKT     &kp RBKT     &kp BSLH
-   &trans    &trans           &trans           &trans           &kp PIPE         &kp LT          &kp GT    &trans       &trans       &trans       &trans       &trans
-                                              &trans           &mo 3            &trans          &trans    &trans       &trans
-            >;
-        };
+                        bindings = <
+   &trans  &kp EXCL   &kp AT     &kp HASH  &kp DLLR  &kp PRCNT  &kp CARET &kp AMPS   &kp ASTRK &kp LPAR  &kp RPAR  &kp BSPC
+   &trans  &kp GRAVE  &kp TILDE  &kp MINUS &kp UNDER &kp LBRC   &kp RBRC  &kp EQUAL  &kp PLUS  &kp LBKT  &kp RBKT  &kp BSLH
+   &trans  &trans     &trans     &trans    &kp PIPE  &kp LT     &kp GT    &trans     &trans    &trans    &trans    &trans
+                                 &trans    &mo 3     &trans     &trans    &trans     &trans
+                        >;
+                };
 
-        // Numbers & Adjust Layer
-        num_adjust_layer {
-            display-name = "Num";
+                // Numbers & Adjust Layer
+                num_adjust_layer {
+                        display-name = "Num";
 // -----------------------------------------------------------------------------------------
 // |      | F1  | F2  | F3  | F4  | F5  |   | F6  |  7  |  8  |  9  |  0  | BSPC |
 // | CAPS | F7  | F8  | F9  | F10 | F11 |   | F12 |  4  |  5  |  6  |  .  |      |
 // |      |BT CLR|BT1 | BT2 | BT3 | BT4 |   | F10 |  1  |  2  |  3  |  /  |      |
 //                    |      |     |     |   |  0  |     |     |
-            bindings = <
-   &trans     &kp F1          &kp F2           &kp F3           &kp F4           &kp F5          &kp F6    &kp N7         &kp N8         &kp N9         &kp N0       &kp BSPC
-   &caps_word &kp F7          &kp F8           &kp F9           &kp F10          &kp F11         &kp F12   &kp N4         &kp N5         &kp N6         &kp DOT      &trans
-   &trans     &bt BT_CLR      &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3    &kp F10   &kp N1         &kp N2         &kp N3         &kp FSLH     &trans
-                                               &trans           &trans           &trans          &kp N0    &trans         &trans
-            >;
+                        bindings = <
+   &trans     &kp F1      &kp F2        &kp F3        &kp F4        &kp F5        &kp F6  &kp N7  &kp N8  &kp N9  &kp N0    &kp BSPC
+   &caps_word &kp F7      &kp F8        &kp F9        &kp F10       &kp F11       &kp F12 &kp N4  &kp N5  &kp N6  &kp DOT   &trans
+   &trans     &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &kp F10 &kp N1  &kp N2  &kp N3  &kp FSLH  &trans
+                                        &trans        &trans        &trans        &kp N0  &trans  &trans
+                        >;
+                };
         };
-    };
 };

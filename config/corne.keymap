@@ -15,6 +15,57 @@
 };
 
 / {
+    macros {
+        macro_arrow: macro_arrow {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_ARROW";
+            #binding-cells = <0>;
+            bindings = <&kp MINUS &kp GT>;
+        };
+        
+        macro_fat_arrow: macro_fat_arrow {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_FAT_ARROW";
+            #binding-cells = <0>;
+            bindings = <&kp EQUAL &kp GT>;
+        };
+        
+        macro_double_equal: macro_double_equal {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_DOUBLE_EQUAL";
+            #binding-cells = <0>;
+            bindings = <&kp EQUAL &kp EQUAL>;
+        };
+        
+        macro_not_equal: macro_not_equal {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_NOT_EQUAL";
+            #binding-cells = <0>;
+            bindings = <&kp EXCL &kp EQUAL>;
+        };
+        
+        macro_string_interp: macro_string_interp {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_STRING_INTERP";
+            #binding-cells = <0>;
+            bindings = <&kp DLLR &kp LBRC &kp RBRC>;
+        };
+        
+        macro_scope_res: macro_scope_res {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_SCOPE_RES";
+            #binding-cells = <0>;
+            bindings = <&kp COLON &kp COLON>;
+        };
+        
+        macro_null_coal: macro_null_coal {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_NULL_COAL";
+            #binding-cells = <0>;
+            bindings = <&kp QMARK &kp QMARK>;
+        };
+    };
+
     behaviors {
         // One-shot modifiers with optimized timeouts
         os_cmd: one_shot_cmd {
@@ -39,17 +90,6 @@
             #binding-cells = <1>;
             bindings = <&kp>;
             one-shot-tap-ms = <800>;
-        };
-        
-        // Auto-shift for better number typing
-        as: auto_shift {
-            compatible = "zmk,behavior-hold-tap";
-            label = "AUTO_SHIFT";
-            #binding-cells = <2>;
-            tapping-term-ms = <150>;
-            quick-tap-ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
         };
     };
 
@@ -103,28 +143,28 @@
         combo_arrow {
             timeout-ms = <35>;
             key-positions = <14 15>;  // s d
-            bindings = <&kp MINUS &kp GT>;
+            bindings = <&macro_arrow>;
             layers = <0>;
         };
         
         combo_fat_arrow {
             timeout-ms = <35>;
             key-positions = <3 4>;   // e r
-            bindings = <&kp EQUAL &kp GT>;
+            bindings = <&macro_fat_arrow>;
             layers = <0>;
         };
         
         combo_equals {
             timeout-ms = <35>;
             key-positions = <21 22>;  // l ; (cross-hand safer)
-            bindings = <&kp EQUAL &kp EQUAL>;
+            bindings = <&macro_double_equal>;
             layers = <0>;
         };
         
         combo_not_equals {
             timeout-ms = <35>;
             key-positions = <2 3>;   // w e
-            bindings = <&kp EXCL &kp EQUAL>;
+            bindings = <&macro_not_equal>;
             layers = <0>;
         };
         
@@ -146,21 +186,21 @@
         combo_string_interpolation {
             timeout-ms = <35>;
             key-positions = <4 5>;   // r t
-            bindings = <&kp DLLR &kp LBRC &kp RBRC>;
+            bindings = <&macro_string_interp>;
             layers = <0>;
         };
         
         combo_scope_resolution {
             timeout-ms = <35>;
             key-positions = <8 9>;   // i o
-            bindings = <&kp COLON &kp COLON>;
+            bindings = <&macro_scope_res>;
             layers = <0>;
         };
         
         combo_null_coalescing {
             timeout-ms = <35>;
             key-positions = <9 10>;  // o p
-            bindings = <&kp QMARK &kp QMARK>;
+            bindings = <&macro_null_coal>;
             layers = <0>;
         };
         
@@ -289,18 +329,18 @@
             >;
         };
 
-        // Numbers & Adjust Layer with auto-shift numbers
+        // Numbers & Adjust Layer
         num_adjust_layer {
             display-name = "Num";
 // -----------------------------------------------------------------------------------------
-// |      | F1  | F2  | F3  | F4  | F5  |   | F6  | 7 & | 8 * | 9 ( |  0  | BSPC |
-// | CAPS | F7  | F8  | F9  | F10 | F11 |   | F12 | 4 $ | 5 % | 6 ^ |  .  |      |
-// |      |BT CLR|BT1 | BT2 | BT3 | BT4 |   | F10 | 1 ! | 2 @ | 3 # |  /  |      |
+// |      | F1  | F2  | F3  | F4  | F5  |   | F6  |  7  |  8  |  9  |  0  | BSPC |
+// | CAPS | F7  | F8  | F9  | F10 | F11 |   | F12 |  4  |  5  |  6  |  .  |      |
+// |      |BT CLR|BT1 | BT2 | BT3 | BT4 |   | F10 |  1  |  2  |  3  |  /  |      |
 //                    |      |     |     |   |  0  |     |     |
             bindings = <
-   &trans     &kp F1          &kp F2           &kp F3           &kp F4           &kp F5          &kp F6    &as AMPS N7    &as ASTRK N8   &as LPAR N9    &kp N0       &kp BSPC
-   &caps_word &kp F7          &kp F8           &kp F9           &kp F10          &kp F11         &kp F12   &as DLLR N4    &as PRCNT N5   &as CARET N6   &kp DOT      &trans
-   &trans     &bt BT_CLR      &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3    &kp F10   &as EXCL N1    &as AT N2      &as HASH N3    &kp FSLH     &trans
+   &trans     &kp F1          &kp F2           &kp F3           &kp F4           &kp F5          &kp F6    &kp N7         &kp N8         &kp N9         &kp N0       &kp BSPC
+   &caps_word &kp F7          &kp F8           &kp F9           &kp F10          &kp F11         &kp F12   &kp N4         &kp N5         &kp N6         &kp DOT      &trans
+   &trans     &bt BT_CLR      &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3    &kp F10   &kp N1         &kp N2         &kp N3         &kp FSLH     &trans
                                                &trans           &trans           &trans          &kp N0    &trans         &trans
             >;
         };
